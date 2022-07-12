@@ -1,0 +1,36 @@
+<body>
+	<button onclick=showCountriesFetch()>Click me</button>
+	<div id="feed"></div>
+</body>
+
+
+<script>
+
+	// ************Fetch************
+	function showCountriesFetch() {
+		fetch('https://restcountries.com/v3.1/all')
+
+			.then(response => response.json())
+			.then(json => {
+				let countries = json
+				console.log(countries)
+				console.log(countries[0].name.common)
+
+				countries.forEach(country => {
+					const countryCard = document.createElement('div')
+					const countryBreak = document.createElement('br')
+					const countryFLag = document.createElement('img')
+
+					countryCard.id = country.name.common
+					countryCard.innerHTML = country.name.common
+					countryFLag.src = country.flags.png
+
+					countryCard.appendChild(countryBreak)
+					countryCard.appendChild(countryFLag)
+					document.getElementById("feed").appendChild(countryCard)
+				})
+			})
+	}
+
+
+</script>
